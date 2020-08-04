@@ -9,9 +9,6 @@ En este repositorio encontrarán los siguientes archivos:
 __Ejemplos que el profesor mostrará en clase__\
 ejemplos_clase.py
 
-__Ejemplos de seaborn para quienes tengan curiosidad en su uso__\
-ejemplos_seaborn.py
-
 __Ejercicios para que el alumno desarrolle durante la clase__\
 ejercicios_clase.py
 
