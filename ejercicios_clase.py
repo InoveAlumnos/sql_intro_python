@@ -54,18 +54,18 @@ def create_schema():
     conn.close()
 
 
-def fill_db():
+def fill():
     print('Completemos esta tablita!')
-    # Llenar la tabla de la secundaria con al munos 5 estudiantes
+    # Llenar la tabla de la secundaria con al menos 5 estudiantes
     # Cada estudiante tiene los posibles campos:
-    # id --> este campo es auto incremental por lo que no deberá ocmpletarlo
-    # name --> El nombre del alumnos (puede ser solo nombre sin apellido)
+    # id --> este campo es auto incremental por lo que no deberá completarlo
+    # name --> El nombre del estudiante (puede ser solo nombre sin apellido)
     # age --> cuantos años tiene el estudiante
     # grade --> en que año de la secundaria se encuentra (1-6)
-    # profesor --> nombre de su tutor
+    # tutor --> nombre de su tutor
 
     # Se debe utilizar la sentencia INSERT.
-    # Observar que hay campos como "grade" y "profesor" que no son obligatorios
+    # Observar que hay campos como "grade" y "tutor" que no son obligatorios
     # en el schema creado, puede obivar en algunos casos completar esos campos
 
 
