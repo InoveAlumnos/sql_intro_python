@@ -1,4 +1,4 @@
-# Ejercicios de práctica [Python]
+# Ejercicios de profundización [Python]
 EL propósito de este ejercicio es que el alumno ponga sus habilidades de SQL junto con otras adqueridas a lo largo de la carrera como el manejo de archivos CSV. Este es un caso típico de ETL en donde se transforma un sistema legacy de datos (un archivo) en una base de datos.
 
 # Enunciado
