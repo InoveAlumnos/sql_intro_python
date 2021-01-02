@@ -150,6 +150,8 @@ if __name__ == '__main__':
     insert_persona('Max', 35, 'Estados Unidos')
     insert_persona('Mirta', 93, 'Argentina')
 
+    show()
+
     update_persona_age('Max', 52)
     delete_persona('Max')
 
