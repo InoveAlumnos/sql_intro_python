@@ -70,7 +70,7 @@ def fill():
 
 
 def fetch():
-    print('Comprovemos su contenido, ¿qué hay en la tabla?')
+    print('Comprobemos su contenido, ¿qué hay en la tabla?')
     # Utilizar la sentencia SELECT para imprimir en pantalla
     # todas las filas con todas sus columnas
     # Utilizar fetchone para imprimir de una fila a la vez

@@ -44,6 +44,7 @@ def create_schema():
             );
             """)
     conn.commit()
+    conn.close()
 
 
 def insert_nacionalidad(nat_id, name):
@@ -57,6 +58,7 @@ def insert_nacionalidad(nat_id, name):
         VALUES (?,?);""", values)
 
     conn.commit()
+    conn.close()
 
 
 def insert_persona(name, age, nationality):
@@ -70,6 +72,7 @@ def insert_persona(name, age, nationality):
         VALUES (?,?,?);""", values)
 
     conn.commit()
+    conn.close()
 
 
 if __name__ == '__main__':
