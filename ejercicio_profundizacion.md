@@ -1,59 +1,65 @@
 # Ejercicios de profundización [Python]
-EL propósito de este ejercicio es que el alumno ponga sus habilidades de SQL junto con otras adqueridas a lo largo de la carrera como el manejo de archivos CSV. Este es un caso típico de ETL en donde se transforma un sistema legacy de datos (un archivo) en una base de datos.
+EL propósito de este ejercicio es que el alumno ponga sus habilidades de SQL junto con otras adqueridas a lo largo del curso como ser dibujado de gráficos con matplotlib y análisis de datos con numpy. Este es un caso típico de análisis de datos
 
 # Enunciado
-El objetivo es realizar un ejercicio muy similar al de "ejercicios_clase" pero ahora el alumno será quien genere el esquema de la base de datos para construirla.\
+El objetivo es análizar los datos del rítmo cardíaco que se tomaron de una persona real mirando un partido de futbol. Toda la información que necesita ya se encuentra almacenada en una base de datos la cual deberá leer para luego analizar.
 
-Deberá generar una base de datos de libros basada en el archivo CSV libreria.csv, el cual posee las siguientes columnas:
-- id del libro (id) --> número (autoincremental, lo define y completa SQL por ustedes)
-- Título del libro (title) --> texto
-- Cantidad de páginas (pags) --> número
-- Nombre del autor (author) --> texto
+Deberá leer de la base de datos "heart.db" la tabla "sensor". Dicha tabla "sensor" solo tiene dos columnas:
+- id --> número (autoincremental, lo define y completa SQL)
+- pulso --> número (registro del pulso cardíaco de la persona en ese momento)
 
-## create_schema
-Deben crear una función "create_schema" la cual se encargará de crear la base de datos y la tabla correspondiente al esquema definido. Deben usar la sentencia CREATE para crear la tabla mencionada.\
-IMPORTANTE: Recuerden que es recomendable borrar la tabla (DROP) antes de crearla si es que existe para que no haya problemas al ejecutar la query.
+El objetivo es leer los valores de la columna "pulso" de toda la base de datos.
 
-## fill()
-Deben crear una función "fill" que lea los datos del archivo CSV y cargue esas filas del archivo como filas de la tabla SQL. Pueden resolverlo de la forma que mejor crean. Deben usar la sentencia INSERT para insertar los datos.\
-Si esta parte les toma demasiado tiempo o se les complica carguen los datos en la base de datos a mano, es preferible que tengan datos en la DB para que puedan avanzar.
+## fetch()
+Deben crear una función "fetch" que lea el valor de la columna "pulso" de todas las filas de la tabla "sensor" de la base de datos "heart.db".\
+Deben usar la sentencia SELECT indicando que desean leer solamente la columna pulso, y leer todo junto utilizando "fetchall".\
+Al finalizar la función rebe retornar la lista de todos los pulsos cardícos obtenidos de la tabla.
 
-## fetch(id)
-Deben crear una función que imprima en pantalla filas de su base de datos, pueden usar esta función para ver que "fill" realizó exactamente lo que era esperado. Deben usar la sentencia SELECT para llegar al objetivo junto con WHERE para leer la fila deseada (si se desea leer una en particular).\
-Esta función recibe como parámetro un id:
-- En caso de que el id sea igual a cero (id=0) deben imprimir todas las filas de la base de datos.
-- En caso de que id sea mayor a cero (id>0) deben imprimir sola la fila correspondiente a ese id.
-IMPORTANTE: Es posible que pasen como id un número no definido en la tabla y el sistema de fetchone les devuelva None, lo cual es correcto, pero el sistema no debe explotar porque haya retornado None. En ese caso pueden imprimir en pantalla que no existe esa fila en la base de datos (más adelante en una API responderá Error 404).
+# Análisis de datos
+Una vez que tengan en sus manos la información de las pulsaciones de todo el partido de futbol en una lista, deben armar las siguientes funciones que serán las que realizarán el análisis de los datos.
 
-## search_author(book_title)
-Deben crear una función que retorne el nombre del autor que pertenece al título del libro pasado como parámetro a esta función. Deben usar la función SELECT junto con WHERE para buscar el autor correspondiente al libro.\
-Al finalizar la función rebe retornar el autor:
+## show(data)
+Deben crear una función "show" que reciba como parámetro la lista de datos recolectada en el punto anterior. Con esa lista de datos deben graficar utilizando matplotlib o seaborn todos los pulsos en un gráfico de línea "plot". El objetivo de esta función es que puedan visualizar la evolución del rítmo cardíaco.
+
+## estadistica(data)
+Deben crear la función "estadistica" para obtener algunos valores estadísticos de los datos e imprimirlos en pantalla. Para eso deberán utilizar numpy y obtener los siguientes valores:
+- Calcular e imprimir el valor medio (mean) con numpy
+- Calcular e imprimir el valor mínhimo (min) con numpy
+- Calcular e imprimir el valor máximo (max) con numpy
+- Calcular e imprimir el desvio estandar (std) con numpy
+
+## regiones(data)
+Deben crear la función "regiones" para graficar en matplotlib las zonas donde la persona estuvo tranquila mirando el partido, donde estuvo aburrida y donde estuvo muy enganchada y entusiasmada. Para ello se utilizará numpy para calcular el valor medio y el desvio estandar como se hizo en el punto anterior y deberá realizar el siguiente proceso:
+- Calcular el valor medio (mean) y el desvio estandar (std) con numpy
+
+Debe crear 3 pares de listas de datos a partir de data:
+- En una lista x1 e y1 para almacenar todos los valores menores o iguales al valor medio menos el desvio (pulso <= mean-std) y su índice correspondiente
+- En una lista x2 e y2 para almacenar todos los valores mayores o iguales al valor medio más el desvio (pulso >= mean-std) y su índice correspondiente
+- En una lista x3 e y3 para almacenar todos aquelas valores que no haya guardado en niguna de las dos listas anteriores y su índice correspondiente
+
+Una vez obtenidos las listas mencionadas, debe dibujar tres scatter plot en un solo gráfico. Cada uno de los tres scatter plot representa cada una de las listas mencionadas que debe dibujar con un color diferente.
+
+NOTA: Les dejamos el ejemplo de como tendrían que armar una de las tres pares de listas, deben modificar el código siguiente para poder agregar las otras dos pares listas mencionadas (x2 y2 e x3 y3).
+IMPORTANTE: Recuerdo calcular "mean" y "std" antes con numpy.
+
 ```
-    return author
+x1 = []
+y1 = []
+for i in range(len(data)):
+    if data[i] <= (mean-std):
+        x1.append(i)
+        y1.append(data[i])
 ```
 
-## Esquema del ejercicio
+# Esquema del ejercicio
 Deben crear su archivo de python y crear las funciones mencionadas en este documento. Deben crear la sección "if _name_ == "_main_" y ahí crear el flujo de prueba de este programa:
 ```
 if __name__ == "__main__":
-  # Crear DB
-  create_schema()
+  # Leer la DB
+  data = fetch()
 
-  # Completar la DB con el CSV
-  fill()
-
-  # Leer filas
-  fetch()  # Ver todo el contenido de la DB
-  fetch(3)  # Ver la fila 3
-  fetch(20)  # Ver la fila 20
-
-  # Buscar autor
-  print(search_author('Relato de un naufrago'))
-
+  # Data analytics
+  show(data)
+  estadistica(data)
+  regiones(data)
 ```
-
-## Para jugar
-Cuando finalicen el ejercicio pueden realizar las siguientes modificaciones:
-- Modificar el nombre de un nombre o creando una función que utilice la sentencia UPDATE y que modifque el título de un libro según el "id" del libro deseado.
-- Puedo generar una función que utilice la sentencia DELETE para borrar libros que ya no se venden en la librería por nombre del libro (título).
-

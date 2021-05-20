@@ -15,9 +15,6 @@ ejercicios_practica.py
 __Ejercicios para que el alumno profundice sobre el tema durante la semana__\
 ejercicios_profundizacion.md
 
-__Ejemplo utilizado en la presentación para las tablas relacionadas__\
-personas_nacionalidad.py
-
 # Consultas
 alumnos@inove.com.ar
 
