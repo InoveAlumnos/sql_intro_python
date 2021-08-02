@@ -34,7 +34,7 @@ Deben crear la función "regiones" para graficar en matplotlib las zonas donde l
 
 Debe crear 3 pares de listas de datos a partir de data:
 - En una lista x1 e y1 para almacenar todos los valores menores o iguales al valor medio menos el desvio (pulso <= mean-std) y su índice correspondiente
-- En una lista x2 e y2 para almacenar todos los valores mayores o iguales al valor medio más el desvio (pulso >= mean-std) y su índice correspondiente
+- En una lista x2 e y2 para almacenar todos los valores mayores o iguales al valor medio más el desvio (pulso >= mean+std) y su índice correspondiente
 - En una lista x3 e y3 para almacenar todos aquelas valores que no haya guardado en niguna de las dos listas anteriores y su índice correspondiente
 
 Una vez obtenidos las listas mencionadas, debe dibujar tres scatter plot en un solo gráfico. Cada uno de los tres scatter plot representa cada una de las listas mencionadas que debe dibujar con un color diferente.
