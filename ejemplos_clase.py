@@ -122,6 +122,29 @@ def show():
     # Cerrar la conexión con la base de datos
     conn.close()
 
+
+def get_all():
+    '''
+    Función obtener todas personas de la base de datos
+    '''
+    # Conectarse a la base de datos
+    conn = sqlite3.connect('personas.db')
+    c = conn.cursor()
+
+    c.execute("SELECT * FROM persona;")
+    
+    # Luego de ejecutar la query pedimos los datos
+    # de todas las personas encontradas
+    personas = c.fetchall()
+
+    # Save
+    conn.commit()
+    # Cerrar la conexión con la base de datos
+    conn.close()
+
+    return personas
+
+
 def get_persona(name):
     '''
     Función obtener una persona de la base de datos
@@ -199,6 +222,10 @@ if __name__ == '__main__':
     insert_persona('Mirta', 93, 'Argentina')
 
     show()
+
+    personas = get_all()
+    print("Personas en la base de datos:")
+    print(personas)
 
     mirta = get_persona('Mirta')
     print("Mira:", mirta)
