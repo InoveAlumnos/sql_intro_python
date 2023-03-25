@@ -20,7 +20,9 @@ import sqlite3
 
 
 def create_schema():
-
+    '''
+    Función para crear la base de datos y las tablas
+    '''
     # Conectarnos a la base de datos
     # En caso de que no exista el archivo se genera
     # como una base de datos vacia
@@ -53,11 +55,17 @@ def create_schema():
 
 
 def insert_persona(name, age, nationality=""):
+    '''
+    Función para insertar a una nueva persona
+    '''
+    # Conectarse a la base de datos
     conn = sqlite3.connect('personas.db')
     c = conn.cursor()
 
     values = [name, age, nationality]
 
+    # Insertar la persona con los valores
+    # de values
     c.execute("""
         INSERT INTO persona (name, age, nationality)
         VALUES (?,?,?);""", values)
@@ -68,6 +76,10 @@ def insert_persona(name, age, nationality=""):
 
 
 def insert_grupo(group):
+    '''
+    Función para insertar a un grupo persona
+    '''
+    # Conectarse a la base de datos
     conn = sqlite3.connect('personas.db')
     c = conn.cursor()
 
@@ -81,6 +93,10 @@ def insert_grupo(group):
 
 
 def show():
+    '''
+    Función para mostrar el contenido de toda
+    la base de datos
+    '''
     # Conectarse a la base de datos
     conn = sqlite3.connect('personas.db')
     c = conn.cursor()
@@ -106,14 +122,43 @@ def show():
     # Cerrar la conexión con la base de datos
     conn.close()
 
-
-def update_persona_age(name, age):
+def get_persona(name):
+    '''
+    Función obtener una persona de la base de datos
+    por su nombre
+    '''
     # Conectarse a la base de datos
     conn = sqlite3.connect('personas.db')
     c = conn.cursor()
 
+    values = [name]
+    c.execute("SELECT * FROM persona WHERE name =?",
+                         values)
+    
+    # Luego de ejecutar la query pedimos los datos
+    # de la persona
+    # Si la persona no existe, fetchone returna None
+    persona = c.fetchone()
+
+    # Save
+    conn.commit()
+    # Cerrar la conexión con la base de datos
+    conn.close()
+
+    return persona
+
+
+def update_persona_age(name, age):
+    '''
+    Función para actualizar la edad de una persona
+    '''
+    # Conectarse a la base de datos
+    conn = sqlite3.connect('personas.db')
+    c = conn.cursor()
+
+    values = [age, name]
     rowcount = c.execute("UPDATE persona SET age =? WHERE name =?",
-                         (age, name)).rowcount
+                         values).rowcount
 
     print('Filas actualizadas:', rowcount)
 
@@ -124,6 +169,9 @@ def update_persona_age(name, age):
 
 
 def delete_persona(name):
+    '''
+    Función para eliminar una persona por su nombre
+    '''
     # Conectarse a la base de datos
     conn = sqlite3.connect('personas.db')
     c = conn.cursor()
@@ -151,6 +199,9 @@ if __name__ == '__main__':
     insert_persona('Mirta', 93, 'Argentina')
 
     show()
+
+    mirta = get_persona('Mirta')
+    print("Mira:", mirta)
 
     update_persona_age('Max', 52)
     delete_persona('Max')
