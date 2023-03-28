@@ -137,8 +137,6 @@ def get_all():
     # de todas las personas encontradas
     personas = c.fetchall()
 
-    # Save
-    conn.commit()
     # Cerrar la conexión con la base de datos
     conn.close()
 
